@@ -2,8 +2,10 @@
 name = "jimtcl-sys"
 version = "0.1.0"
 authors = ["Coleman McFarland <coleman.mcfarland@gmail.com>"]
+build = "build.rs"
 
 [dependencies]
 
 [build-dependencies]
 cc = "*"
+bindgen = "*"

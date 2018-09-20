@@ -1,7 +1,23 @@
+pub extern crate jimtcl_sys;
+
+use jimtcl_sys::*;
+
+struct Interpreter<T> {
+    inner: Box<T>,
+}
+
+impl Interpreter {
+    pub fn new() -> Self {
+        let interp = unsafe { Jim_CreateInterp() };
+        Interpreter
+    }
+}
+
 #[cfg(test)]
 mod tests {
+    use super::*;
     #[test]
     fn it_works() {
-        assert_eq!(2 + 2, 4);
+        let i = Interpreter::new();
     }
 }
