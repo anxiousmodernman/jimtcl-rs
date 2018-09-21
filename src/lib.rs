@@ -1,3 +1,4 @@
+#![allow(unreachable_code)]
 pub extern crate jimtcl_sys;
 
 use std::ffi::*;
@@ -57,6 +58,7 @@ impl Interpreter {
             "source" => unsafe {
                 let s = (*res).bytes;
                 let ss = CStr::from_ptr(s).to_str().unwrap().to_owned();
+                Jim_Free(jim_obj as *mut c_void);
                 return Some(JimVal::Str(ss));
             },
             _ => unimplemented!("got type: {:?}", type_name),
@@ -76,7 +78,7 @@ pub trait Command {
 mod tests {
     use super::*;
     #[test]
-    fn it_works() {
+    fn simple_get_val() {
         let i = Interpreter::new();
         let code = "set a 69";
         i.eval(code);
