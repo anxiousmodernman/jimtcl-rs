@@ -14,7 +14,7 @@ run-build:
   stage: build
   image: rust:latest
   script:
-  - apt install build-essential clang
+  - apt install libclang
   - rustc --version && cargo --version
   - cargo build --release --jobs 1
 
