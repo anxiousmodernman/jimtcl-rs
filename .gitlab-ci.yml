@@ -1,13 +1,15 @@
-variables:
-  GIT_STRATEGY: "pull"
-  GIT_SUBMODULE_STRATEGY: "recursive"
-  #GIT_CHECKOUT: "true"
+# Use Rust docker image, see: https://hub.docker.com/_/rust/
+image: rust:latest
 
-before_script:
- - |
-    curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain none
+# Defines stages which are to be executed
+stages:
+  - build
 
-test:
-    script:
-     - |
-        cargo test
+# Run `cargo build` for the project with stable Rust
+run-build:
+  stage: build
+  image: rust:latest
+  script:
+  - rustc --version && cargo --version
+  - cargo build --release --jobs 1
+
