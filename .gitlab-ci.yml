@@ -1,3 +1,7 @@
+variables:
+  GIT_STRATEGY: "pull"
+  GIT_SUBMODULE_STRATEGY: "recursive"
+  GIT_CHECKOUT: "true"
 # Use Rust docker image, see: https://hub.docker.com/_/rust/
 image: rust:latest
 
@@ -10,6 +14,7 @@ run-build:
   stage: build
   image: rust:latest
   script:
+  - apt install llvm
   - rustc --version && cargo --version
   - cargo build --release --jobs 1
 
