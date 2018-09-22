@@ -1,25 +1,39 @@
-variables:
-  GIT_STRATEGY: "pull"
-  GIT_SUBMODULE_STRATEGY: "recursive"
-  GIT_CHECKOUT: "true"
-# Use Rust docker image, see: https://hub.docker.com/_/rust/
-image: rust:latest
 
-# Defines stages which are to be executed
+variables:
+    APT_CACHE_DIR: apt-cache
+    PKG_CONFIG_ALLOW_CROSS: 1 # Enable cross compilation for pkg_config
+
+cache:
+    key: "$CI_JOB_NAME"
+    untracked: true
+    paths:
+    - apt-cache/
+    - cargo/
+    - target/
+
 stages:
   - build
-  - test
+  - lint
 
-# Run `cargo build` for the project with stable Rust
-run-build:
-  stage: build
-  image: rust:latest
-  script:
-  - rustc --version && cargo --version
-  - cargo build --release --jobs 1
+.build_template: &build
+    image: "rust:latest"
+    stage: build
+    before_script:
+    - mkdir -pv $APT_CACHE_DIR
+    - apt-get -qq update
+    - apt-get -o dir::cache::archives="$APT_CACHE_DIR" -qq -y install build-essential curl git pkg-config $EXTRA_PACKAGES
+    - export PATH="/root/.cargo/bin:$PATH"
+    - rustup target add $TARGET || true # Ignore failures when the target and toolchain are the same
+    - cargo update
+    script:
+    - cargo build --target=$TARGET
+    - if [[ -z $DISABLE_TESTS ]]; then cargo build --examples --target=$TARGET; fi
+    - if [[ -z $DISABLE_TESTS ]]; then cargo build --tests --target=$TARGET; fi
+    - if [[ -z $DISABLE_TESTS ]]; then cargo test --target=$TARGET; fi
 
-run-test:
-  stage: test
-  image: rust:latest
-  script:
-  - cargo test
+x86_64-unknown-linux-gnu-latest:
+    <<: *build
+    image: "rust:latest"
+    variables:
+        EXTRA_PACKAGES: "llvm-dev"
+        TARGET: x86_64-unknown-linux-gnu
