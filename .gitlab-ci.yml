@@ -1,0 +1,13 @@
+variables:
+  GIT_STRATEGY: "pull"
+  GIT_SUBMODULE_STRATEGY: "recursive"
+  GIT_CHECKOUT: "true"
+
+before_script:
+ - |
+    curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain none
+
+test:
+    script:
+     - |
+        cargo test
