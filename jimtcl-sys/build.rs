@@ -15,6 +15,7 @@ fn main() {
     }
     println!("cargo:rustc-link-search=./jimtcl");
     println!("cargo:rustc-link-lib=jim");
+    println!("cargo:rustc-link-lib=jim-config");
     println!("cargo:rustc-link-lib=libclang");
     let _ = Command::new("./configure")
         .args(&[
