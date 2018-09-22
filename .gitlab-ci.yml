@@ -1,7 +1,7 @@
 variables:
   GIT_STRATEGY: "pull"
   GIT_SUBMODULE_STRATEGY: "recursive"
-  GIT_CHECKOUT: "true"
+  #GIT_CHECKOUT: "true"
 
 before_script:
  - |
