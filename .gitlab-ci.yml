@@ -12,9 +12,8 @@ stages:
 # Run `cargo build` for the project with stable Rust
 run-build:
   stage: build
-  image: rust:latest
+  image: rust:nightly
   script:
-  - apt install libclang
   - rustc --version && cargo --version
   - cargo build --release --jobs 1
 
