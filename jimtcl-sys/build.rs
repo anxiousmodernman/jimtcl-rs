@@ -19,11 +19,11 @@ fn main() {
             "--enable-utf8",
             "--ipv6",
             "--disable-docs",
-        ]).current_dir("./jimtcl")
+        ]).current_dir("jimtcl")
         .output()
         .expect("configure failed");
     let _ = Command::new("make")
-        .current_dir("./jimtcl")
+        .current_dir("jimtcl")
         .output()
         .expect("make failed");
 
