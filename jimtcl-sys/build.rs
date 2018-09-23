@@ -7,12 +7,12 @@ use std::path::PathBuf;
 use std::process::Command;
 
 fn main() {
-    if !Path::new("jimtcl/.git").exists() {
-        Command::new("git")
-            .args(&["submodule", "update", "--init", "--recursive"])
-            .status()
-            .unwrap();
-    }
+    //if !Path::new("jimtcl/.git").exists() {
+    Command::new("git")
+        .args(&["submodule", "update", "--init", "--recursive"])
+        .status()
+        .unwrap();
+    //}
     let _ = Command::new("./configure")
         .args(&[
             "--with-ext=\"oo tree binary sqlite3\"",
