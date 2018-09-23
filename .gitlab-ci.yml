@@ -25,8 +25,9 @@ stages:
     - export PATH="/root/.cargo/bin:$PATH"
     - rustup target add $TARGET || true # Ignore failures when the target and toolchain are the same
     - cargo update
-    - (cd /builds/keyvalue/jimtcl-rs/jimtcl-sys && git submodule update --init --recursive)
-    - (cd /builds/keyvalue/jimtcl-rs/jimtcl-sys/jimtcl && ./configure --with-ext="oo tree binary sqlite3" --enable-utf8 --ipv6 --disable-docs && make install)
+    #- (cd /builds/keyvalue/jimtcl-rs/jimtcl-sys && git submodule update --init --recursive)
+    #- (cd /builds/keyvalue/jimtcl-rs/jimtcl-sys/jimtcl && ./configure --with-ext="oo tree binary sqlite3" --enable-utf8 --ipv6 --disable-docs && make install)
+    #- (cd /builds/keyvalue/jimtcl-rs/jimtcl-sys/jimtcl && file libjim.a)
     script:
     - cargo build --target=$TARGET
     - if [[ -z $DISABLE_TESTS ]]; then cargo build --examples --target=$TARGET; fi
