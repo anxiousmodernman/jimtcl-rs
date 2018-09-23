@@ -32,7 +32,7 @@ impl Interpreter {
         }
     }
 
-    pub fn add_command(&self, cmd: Box<Command>) {}
+    pub fn add_command(&self, _cmd: Box<Command>) {}
 
     pub fn get_val(&self, name: &str) -> Option<JimVal> {
         // get by name
@@ -114,7 +114,7 @@ mod tests {
         set a 69
         set b 420
         if 0 { puts hello }
-        proc procName { argument } { 
+        proc procName { argument } {
             # script contents
             return
         }
