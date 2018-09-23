@@ -28,6 +28,7 @@ stages:
     #- (cd /builds/keyvalue/jimtcl-rs/jimtcl-sys && git submodule update --init --recursive)
     #- (cd /builds/keyvalue/jimtcl-rs/jimtcl-sys/jimtcl && ./configure --with-ext="oo tree binary sqlite3" --enable-utf8 --ipv6 --disable-docs && make install)
     #- (cd /builds/keyvalue/jimtcl-rs/jimtcl-sys/jimtcl && file libjim.a)
+    - (cd /builds/keyvalue/jimtcl-rs/jimtcl-sys/jimtcl && ls)
     script:
     - cargo build --target=$TARGET
     - if [[ -z $DISABLE_TESTS ]]; then cargo build --examples --target=$TARGET; fi
