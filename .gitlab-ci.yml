@@ -25,7 +25,7 @@ stages:
     - export PATH="/root/.cargo/bin:$PATH"
     - rustup target add $TARGET || true # Ignore failures when the target and toolchain are the same
     - cargo update
-    - cd /builds/keyvalue/jimtcl-rs/jimtcl-sys && git submodule init --recursive
+    - cd /builds/keyvalue/jimtcl-rs/jimtcl-sys && git submodule update --init --recursive
     script:
     - cargo build --target=$TARGET
     - if [[ -z $DISABLE_TESTS ]]; then cargo build --examples --target=$TARGET; fi
