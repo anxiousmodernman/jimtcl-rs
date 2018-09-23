@@ -7,12 +7,26 @@ use std::path::PathBuf;
 use std::process::Command;
 
 fn main() {
-    if !Path::new("jimtcl/.git").exists() {
-        Command::new("git")
-            .args(&["submodule", "update", "--init", "--recursive"])
-            .status()
-            .unwrap();
-    }
+    //if !Path::new("jimtcl/.git").exists() {
+    Command::new("git")
+        .args(&["submodule", "update", "--init", "--recursive"])
+        .status()
+        .unwrap();
+    //}
+    let _ = Command::new("./configure")
+        .args(&[
+            "--with-ext=\"oo tree binary sqlite3\"",
+            "--enable-utf8",
+            "--ipv6",
+            "--disable-docs",
+        ]).current_dir("jimtcl")
+        .output()
+        .expect("configure failed");
+    let _ = Command::new("make")
+        .current_dir("jimtcl")
+        .output()
+        .expect("make failed");
+
     println!("cargo:rustc-link-search=./jimtcl");
     println!("cargo:rustc-link-lib=jim");
     let bindings = bindgen::Builder::default() // The input header we would like to generate         // bindings for.
