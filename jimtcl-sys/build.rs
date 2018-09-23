@@ -22,13 +22,13 @@ fn main() {
         ]).current_dir("./jimtcl")
         .output()
         .expect("configure failed");
-    println!("cargo:rustc-link-search=.");
-    println!("cargo:rustc-link-lib=jim");
     let _ = Command::new("make")
         .current_dir("./jimtcl")
         .output()
         .expect("make failed");
 
+    println!("cargo:rustc-link-search=./jimtcl");
+    println!("cargo:rustc-link-lib=jim");
     let bindings = bindgen::Builder::default() // The input header we would like to generate         // bindings for.
         .header("wrapper.h") // Finish the builder and generate the bindings.
         .generate() // Unwrap the Result and panic on failure.
