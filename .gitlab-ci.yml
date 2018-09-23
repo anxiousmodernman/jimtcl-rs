@@ -31,7 +31,7 @@ stages:
     - (cd /builds/keyvalue/jimtcl-rs/jimtcl-sys/jimtcl && ls)
     - (cd /builds/keyvalue/jimtcl-rs/jimtcl-sys/jimtcl && pkg-config --variable pc_path pkg-config)
     script:
-    - cargo build --target=$TARGET
+    - PKG_CONFIG_PATH="$PKG_CONFIG_PATH:$(pwd)/jimtcl-sys/jimctl" cargo build --target=$TARGET
     - if [[ -z $DISABLE_TESTS ]]; then cargo build --examples --target=$TARGET; fi
     - if [[ -z $DISABLE_TESTS ]]; then cargo build --tests --target=$TARGET; fi
     - if [[ -z $DISABLE_TESTS ]]; then cargo test --target=$TARGET; fi
