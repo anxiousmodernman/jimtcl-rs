@@ -34,7 +34,7 @@ stages:
     - cargo build --target=$TARGET
     - if [[ -z $DISABLE_TESTS ]]; then cargo build --examples --target=$TARGET; fi
     - if [[ -z $DISABLE_TESTS ]]; then cargo build --tests --target=$TARGET; fi
-    - if [[ -z $DISABLE_TESTS ]]; then cargo test --target=$TARGET; fi
+    #- if [[ -z $DISABLE_TESTS ]]; then cargo test --target=$TARGET; fi
 
 x86_64-unknown-linux-gnu-latest:
     <<: *build
