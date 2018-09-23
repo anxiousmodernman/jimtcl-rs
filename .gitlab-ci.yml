@@ -35,5 +35,5 @@ x86_64-unknown-linux-gnu-latest:
     <<: *build
     image: "rust:latest"
     variables:
-        EXTRA_PACKAGES: "llvm-dev clang"
+        EXTRA_PACKAGES: "autoconf llvm-dev clang"
         TARGET: x86_64-unknown-linux-gnu
