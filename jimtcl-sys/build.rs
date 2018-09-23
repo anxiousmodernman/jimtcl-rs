@@ -22,7 +22,7 @@ fn main() {
         ]).current_dir("./jimtcl")
         .output()
         .expect("configure failed");
-    println!("cargo:rustc-link-search=./jimtcl");
+    println!("cargo:rustc-link-search=.");
     println!("cargo:rustc-link-lib=jim");
     let _ = Command::new("make")
         .current_dir("./jimtcl")
