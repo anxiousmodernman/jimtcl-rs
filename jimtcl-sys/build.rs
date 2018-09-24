@@ -17,7 +17,7 @@ fn main() {
         .args(&[
             "--with-ext=\"oo tree binary sqlite3\"",
             "--enable-utf8",
-            "--ipv6",
+            "--ipvxxx6",
             "--disable-docs",
         ]).current_dir("jimtcl")
         .output()
@@ -27,6 +27,9 @@ fn main() {
         .output()
         .expect("make failed");
 
+    let _ = Command::new("git")
+        .args(&["am", "../1508-epic-patches.patch"])
+        .current_dir("jimtcl").output().expect("patching failed");
     println!("cargo:rustc-link-search=./jimtcl");
     println!("cargo:rustc-link-lib=jim");
     let bindings = bindgen::Builder::default() // The input header we would like to generate         // bindings for.

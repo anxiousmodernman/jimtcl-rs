@@ -25,16 +25,16 @@ stages:
     - export PATH="/root/.cargo/bin:$PATH"
     - rustup target add $TARGET || true # Ignore failures when the target and toolchain are the same
     - cargo update
-    - (cd /builds/keyvalue/jimtcl-rs/jimtcl-sys && git submodule update --init --recursive)
-    - (cd /builds/keyvalue/jimtcl-rs/jimtcl-sys/jimtcl && ./configure --with-ext="oo tree binary sqlite3" --enable-utf8 --ipv6 --disable-docs && make install)
-    - (cd /builds/keyvalue/jimtcl-rs/jimtcl-sys/jimtcl && file libjim.a)
-    - (cd /builds/keyvalue/jimtcl-rs/jimtcl-sys/jimtcl && ls)
-    - (cd /builds/keyvalue/jimtcl-rs/jimtcl-sys/jimtcl && pkg-config --variable pc_path pkg-config)
+    #- (cd /builds/keyvalue/jimtcl-rs/jimtcl-sys && git submodule update --init --recursive)
+    #- (cd /builds/keyvalue/jimtcl-rs/jimtcl-sys/jimtcl && ./configure --with-ext="oo tree binary sqlite3" --enable-utf8 --ipv6 --disable-docs && make install)
+    #- (cd /builds/keyvalue/jimtcl-rs/jimtcl-sys/jimtcl && file libjim.a)
+    #- (cd /builds/keyvalue/jimtcl-rs/jimtcl-sys/jimtcl && ls)
+    #- (cd /builds/keyvalue/jimtcl-rs/jimtcl-sys/jimtcl && pkg-config --variable pc_path pkg-config)
     script:
     - cargo build --target=$TARGET
     - if [[ -z $DISABLE_TESTS ]]; then cargo build --examples --target=$TARGET; fi
     - if [[ -z $DISABLE_TESTS ]]; then cargo build --tests --target=$TARGET; fi
-    #- if [[ -z $DISABLE_TESTS ]]; then cargo test --target=$TARGET; fi
+    - if [[ -z $DISABLE_TESTS ]]; then cargo test --target=$TARGET; fi
 
 x86_64-unknown-linux-gnu-latest:
     <<: *build
