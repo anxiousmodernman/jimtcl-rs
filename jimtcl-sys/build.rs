@@ -13,22 +13,22 @@ fn main() {
         .status()
         .unwrap();
     //}
-    let _ = Command::new("./configure")
-        .args(&[
-            "--with-ext=\"oo tree binary sqlite3\"",
-            "--enable-utf8",
-            "--ipvxxx6",
-            "--disable-docs",
-        ]).current_dir("jimtcl")
-        .output()
-        .expect("configure failed");
-    let _ = Command::new("git")
-        .args(&["am", "../1508-epic-patches.patch"])
-        .current_dir("jimtcl").output().expect("patching failed");
-    let _ = Command::new("make")
-        .current_dir("jimtcl")
-        .output()
-        .expect("make failed");
+//    let _ = Command::new("./configure")
+//        .args(&[
+//            "--with-ext=\"oo tree binary sqlite3\"",
+//            "--enable-utf8",
+//            "--ipvxxx6",
+//            "--disable-docs",
+//        ]).current_dir("jimtcl")
+//        .output()
+//        .expect("configure failed");
+//    let _ = Command::new("git")
+//        .args(&["am", "../1508-epic-patches.patch"])
+//        .current_dir("jimtcl").output().expect("patching failed");
+//    let _ = Command::new("make")
+//        .current_dir("jimtcl")
+//        .output()
+//        .expect("make failed");
 
     println!("cargo:rustc-link-search=./jimtcl");
     println!("cargo:rustc-link-lib=jim");
