@@ -13,9 +13,6 @@ fn main() {
         .status()
         .unwrap();
     //}
-    let _ = Command::new("git")
-        .args(&["am", "../1508-epic-patches.patch"])
-        .current_dir("jimtcl").output().expect("patching failed");
     let _ = Command::new("./configure")
         .args(&[
             "--with-ext=\"oo tree binary sqlite3\"",
@@ -25,6 +22,9 @@ fn main() {
         ]).current_dir("jimtcl")
         .output()
         .expect("configure failed");
+    let _ = Command::new("git")
+        .args(&["am", "../1508-epic-patches.patch"])
+        .current_dir("jimtcl").output().expect("patching failed");
     let _ = Command::new("make")
         .current_dir("jimtcl")
         .output()
