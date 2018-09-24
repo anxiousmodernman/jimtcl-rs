@@ -33,8 +33,7 @@ fn main() {
 //        .output()
 //        .expect("make failed");
 
-    println!("cargo:rustc-link-search=./jimtcl");
-    println!("cargo:rustc-link-lib=jim");
+    println!("cargo:include=./jimtcl");
     let bindings = bindgen::Builder::default() // The input header we would like to generate         // bindings for.
         .header("wrapper.h") // Finish the builder and generate the bindings.
         .generate() // Unwrap the Result and panic on failure.
