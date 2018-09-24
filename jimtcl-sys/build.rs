@@ -10,11 +10,11 @@ fn main() {
     //if !Path::new("jimtcl/.git").exists() {
     Command::new("git")
         .args(&["submodule", "update", "--init", "--recursive"])
-        .status()
+        .spawn()
         .unwrap();
     //}
-    let _ = Command::new("./build.sh")
-        .output()
+    Command::new("./build.sh")
+        .spawn()
         .expect("build failed");
 //    let _ = Command::new("./configure")
 //        .args(&[
