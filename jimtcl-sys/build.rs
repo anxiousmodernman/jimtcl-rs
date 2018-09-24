@@ -14,7 +14,6 @@ fn main() {
         .unwrap();
     //}
     let _ = Command::new("./build.sh")
-        .current_dir("jimtcl")
         .output()
         .expect("build failed");
 //    let _ = Command::new("./configure")
