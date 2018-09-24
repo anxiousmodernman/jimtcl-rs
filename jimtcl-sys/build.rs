@@ -8,13 +8,13 @@ use std::process::Command;
 
 fn main() {
     //if !Path::new("jimtcl/.git").exists() {
-    Command::new("git")
-        .args(&["submodule", "update", "--init", "--recursive"])
-        .spawn()
+    let _ = Command::new("git")
+        .args(&["submodule", "update", "--init"])
+        .status()
         .unwrap();
     //}
-    Command::new("./build.sh")
-        .spawn()
+    let _ = Command::new("./build.sh")
+        .status()
         .expect("build failed");
 //    let _ = Command::new("./configure")
 //        .args(&[
@@ -34,10 +34,10 @@ fn main() {
 //        .expect("make failed");
 
     println!("cargo:include=./jimtcl");
-    let bindings = bindgen::Builder::default() // The input header we would like to generate         // bindings for.
-        .header("wrapper.h") // Finish the builder and generate the bindings.
-        .generate() // Unwrap the Result and panic on failure.
-        .expect("Unable to generate bindings"); // Write the bindings to the $OUT_DIR/bindings.rs file.
+    let bindings = bindgen::Builder::default() 
+        .header("wrapper.h") 
+        .generate() 
+        .expect("Unable to generate bindings"); 
     let out_path = PathBuf::from(env::var("OUT_DIR").unwrap());
     bindings
         .write_to_file(out_path.join("bindings.rs"))
