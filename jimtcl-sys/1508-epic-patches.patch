@@ -1,0 +1,43 @@
+From 191390f955a0b3efaefff218f3ee663df7479b67 Mon Sep 17 00:00:00 2001
+From: Coleman McFarland <coleman.mcfarland@gmail.com>
+Date: Sun, 23 Sep 2018 21:21:55 -0700
+Subject: [PATCH 1508/1508] epic patches
+
+---
+ jim-subcmd.h | 2 +-
+ jim.h        | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/jim-subcmd.h b/jim-subcmd.h
+index ab30f37..e45b6c1 100644
+--- a/jim-subcmd.h
++++ b/jim-subcmd.h
+@@ -4,7 +4,7 @@
+ #ifndef JIM_SUBCMD_H
+ #define JIM_SUBCMD_H
+ 
+-#include <jim.h>
++#include "jim.h"
+ 
+ #ifdef __cplusplus
+ extern "C" {
+diff --git a/jim.h b/jim.h
+index 1dd0f0c..973d3b6 100644
+--- a/jim.h
++++ b/jim.h
+@@ -79,10 +79,10 @@ extern "C" {
+  * System configuration
+  * autoconf (configure) will set these
+  * ---------------------------------------------------------------------------*/
+-#include <jim-win32compat.h>
++#include "jim-win32compat.h"
+ 
+ #ifndef HAVE_NO_AUTOCONF
+-#include <jim-config.h>
++#include "jim-config.h"
+ #endif
+ 
+ /* -----------------------------------------------------------------------------
+-- 
+2.18.0
+
