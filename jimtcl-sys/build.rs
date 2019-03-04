@@ -1,6 +1,6 @@
-extern crate bindgen;
-extern crate cc;
-
+use cc;
+// NOTE: bindgen requires libclang
+use bindgen;
 use std::env;
 use std::path::Path;
 use std::path::PathBuf;
@@ -27,6 +27,7 @@ fn main() {
         .output()
         .expect("make failed");
 
+//    println!("cargo:rustc-link-search=/usr/include/clang/7/include");
     println!("cargo:rustc-link-search=./jimtcl");
     println!("cargo:rustc-link-lib=jim");
     let bindings = bindgen::Builder::default() // The input header we would like to generate         // bindings for.

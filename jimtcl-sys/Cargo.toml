@@ -3,6 +3,7 @@ name = "jimtcl-sys"
 version = "0.1.0"
 authors = ["Coleman McFarland <coleman.mcfarland@gmail.com>"]
 build = "build.rs"
+edition = "2018"
 
 [dependencies]
 
