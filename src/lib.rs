@@ -13,7 +13,8 @@ pub enum JimVal {
     // Dict
     // Bool
 }
-/// A wrapper around the Jim Tcl interpeter. Not thread safe.
+
+/// A wrapper around the Jim Tcl interpeter. Not thread safe yet.
 pub struct Interpreter {
     inner: *mut Jim_Interp,
 }
@@ -109,17 +110,23 @@ mod tests {
     #[test]
     fn simple_get_val() {
         let i = Interpreter::new();
-        let code = "
+        let code = r#"
+
         # This is Tcl code
         set a 69
         set b 420
-        if 0 { puts hello }
+        
+        # Run rust tests like this to see stdout from the Jim interpreter
+        # cargo test -- --nocapture
+        
+        if 0 { puts "CAN'T SEE THIS" }
+        if 1 { puts "YOU CAN SEE THIS"  }
         proc procName { argument } {
             # script contents
             return
         }
         set d [dict create foo baz]
-        ";
+        "#;
         i.eval(code);
         assert_eq!(Some(JimVal::Str("69".to_string())), i.get_val("a"));
         assert_eq!(Some(JimVal::Str("420".to_string())), i.get_val("b"));
